@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, StrictMode, Fragment } from 'react';
 import './App.css';
+
+import Footer from './components/Footer';
+import Movies from './components/Movies';
+import Fetch from './components/Fetch';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <>
+        <header>
+          <h2>Top Rated Movies</h2>
         </header>
-      </div>
+        {/* <Movies /> */}
+        <StrictMode>
+          <Fetch url="/movies.json">
+            {({ data, ...props }) => <Movies movies={data} {...props} />}
+          </Fetch>
+        </StrictMode>
+        <Footer />
+      </>
     );
   }
 }
