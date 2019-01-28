@@ -13,9 +13,9 @@ class App extends Component {
         <header>
           <h2>Top Rated Movies</h2>
         </header>
-        <Counter />
+        {/* <Counter /> */}
         {/* <Clock /> */}
-        {/* <Movies /> */}
+        <Movies />
         <Footer />
       </StrictMode>
     );

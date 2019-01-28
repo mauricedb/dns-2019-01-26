@@ -1,5 +1,5 @@
 import React, { Component, lazy, Suspense, useState } from 'react';
-import useFetch from './useAbortableFetch';
+import useAbortableFetch from './useAbortableFetch';
 import './Movies.css';
 
 import Loading from './Loading';
@@ -7,7 +7,7 @@ import MovieListCard from './MovieListCard';
 const SelectedMovie = lazy(() => import('./SelectedMovie'));
 
 const Movies = () => {
-  const { loading, data: movies, error } = useFetch('/movies.json');
+  const { loading, data: movies, error } = useAbortableFetch('/movies.json');
   const [selected, setSelected] = useState(null);
 
   if (loading) {

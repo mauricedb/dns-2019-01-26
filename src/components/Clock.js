@@ -1,27 +1,27 @@
 import React, { Component, useState, useEffect } from 'react';
+import { clearInterval } from 'timers';
 
-class Clock extends Component {
-  handle = 0;
-  state = { now: new Date() };
+const useNow = (interval) => {
+  let [now, setNow] = useState(new Date());
 
-  componentDidMount() {
-    this.handle = setInterval(() => this.setState({ now: new Date() }), 1000);
-  }
+  useEffect(
+    () => {
+      const handle = setInterval(() => setNow(new Date()), interval);
+      return () => clearInterval(handle);
+    },
+    [interval]
+  );
 
-  componentWillUnmount() {
-    if (this.handle) {
-      clearInterval(this.handle);
-    }
-  }
+  return now;
+};
 
-  render() {
-    const { now } = this.state;
 
-    return (
-      <div className="center">The time is: {now.toLocaleTimeString()}</div>
-    );
-  }
-}
+
+const Clock = () => {
+  const now = useNow(1000);
+
+  return <div className="center">The time is: {now.toLocaleTimeString()}</div>;
+};
 
 // const Clock = () => {
 //   const [now, setNow] = useState(new Date());
@@ -33,4 +33,4 @@ class Clock extends Component {
 //   return <div className="center">The time is: {now.toLocaleTimeString()}</div>;
 // };
 
-// export default Clock;
+export default Clock;
